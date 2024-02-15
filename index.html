@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Camera</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body>
+    {% comment %} Open Camera section  {% endcomment %}
+    <div class="container m-4">
+<video id="video" autoplay></video>
+
+<div class="container">
+<button class="btn btn-success" id="cameraBtn" onclick="openCamera()">Open Camera</button>
+
+
+<button class="btn btn-danger" id="cameraBtn" onclick="closeCamera()">Close Camera</button>
+</div> 
+{% comment %} Open Screen Share Section  {% endcomment %}
+<div class="container m-4">
+<video id="screen" autoplay></video>
+<div class="container">
+<button class="btn btn-success" id="screenBtn" onclick="screenShare()">start screen share</button>
+</div> 
+
+
+
+<script>
+    // Opening and closing Camera code //
+    function openCamera() {
+        navigator.mediaDevices.getUserMedia({video: true, audio: false})
+      .then(function(stream) {
+            var video = document.getElementById('video');
+            video.srcObject = stream;
+        })
+      .catch(function(err) {
+            console.log(err);
+        });
+    }
+    function closeCamera() {
+        var video = document.getElementById('video');
+        video.srcObject = null;
+    }
+
+    // Opening and closing Screen Share code //
+    function screenShare() {
+        navigator.mediaDevices.getDisplayMedia({screen: true, audio: false})
+    
+   .then(function(stream) {
+            var video = document.getElementById('screen');
+            video.srcObject = stream;
+        })
+    }
+</script>
+</body>
+</html>
